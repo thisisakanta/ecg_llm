@@ -11,14 +11,13 @@ network:
   ###
 
 dataset:
-  dataset_name: 'ptbxl'
+  dataset_name: "ptbxl"
   ## this is for PTB-XL dataset 21k
-  ecg_path: '/home/user/Downloads/2005047/MEIT/ECG_LLMs/ptbxl/' # add your image file path here
-  text_path: '/home/user/Downloads/2005047/MEIT/ECG_LLMs/ptbxl/ptbxl_database.csv'
+  ecg_path: "/content/drive/MyDrive/Akanta/ptb-xl" # add your image file path here
+  text_path: "/content/drive/MyDrive/Akanta/ptb-xl/ptbxl_database.csv"
   ## this is for MIMIC-ECG dataset 800k
   # ecg_path: '/fs/scratch/PAS2473/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/' # add your image file path here
   # text_path: '/fs/scratch/PAS2473/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/machine_measurements.csv'
-
 
 # params for trainer
 trainer:
@@ -37,4 +36,4 @@ optimizer:
     weight_decay: 1.0e-5
 
 # your model name
-wandb_name: 'test_EKG_hm_first'
+wandb_name: "test_EKG_hm_first"
