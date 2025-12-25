@@ -15,17 +15,19 @@ accelerate launch --main_process_port 31225 \
     --num_processes $NUM_GPUS \
     /content/ecg_llm/finetune_ecgllm_with_lora_ptbxl.py \
     --model_name_or_path meta-llama/Llama-2-7b-hf \
-    --lora_rank 16 \
+    --lora_rank 8 \
     --lora_alpha 16 \
     --lora_dropout 0.1 \
     --tokenizer_name meta-llama/Llama-2-7b-hf \
     --use_slow_tokenizer \
     --train_data_path /content/ecg_llm/ptbxl/ptbxl_ecg_train.jsonl \
     --max_seq_length 128 \
+    --gradient_checkpointing \
+    --optim adamw_bnb_8bit \
     --preprocessing_num_workers 2 \
     --checkpointing_steps epoch \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
+    --gradient_accumulation_steps 16 \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
