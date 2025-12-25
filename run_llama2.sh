@@ -23,7 +23,7 @@ accelerate launch --main_process_port 31225 \
     --train_data_path /content/ecg_llm/ptbxl/ptbxl_ecg_train.jsonl \
     --max_seq_length 128 \
     --gradient_checkpointing \
-    --optim adamw_bnb_8bit \
+    --use_8bit_optimizer \
     --preprocessing_num_workers 2 \
     --checkpointing_steps epoch \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
