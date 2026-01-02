@@ -21,7 +21,7 @@ accelerate launch --main_process_port 31225 \
     --lora_dropout 0.1 \
     --tokenizer_name meta-llama/Llama-2-7b-hf \
     --use_slow_tokenizer \
-    --train_data_path /content/drive/MyDrive/Akanta/ptb-xl/ptbxl_ecg_train.jsonl \
+    --train_data_path /content/ecg_llm/ptb-xl/ptbxl_ecg_train.jsonl \
     --max_seq_length 128 \
     --gradient_checkpointing \
     --use_8bit_optimizer \
