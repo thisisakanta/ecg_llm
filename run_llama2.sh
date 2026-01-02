@@ -3,7 +3,7 @@ export CUDA_VISIBLE_DEVICES=0
 MODEL_SIZE=7B
 NUM_GPUS=1
 BATCH_SIZE_PER_GPU=2
-TOTAL_BATCH_SIZE=64 # 144 50277
+TOTAL_BATCH_SIZE=32 # 144 50277
 GRADIENT_ACC_STEPS=$(($TOTAL_BATCH_SIZE/$NUM_GPUS/$BATCH_SIZE_PER_GPU))
 echo "Training llama model ${MODEL_SIZE} using $NUM_GPUS GPUs, $BATCH_SIZE_PER_GPU batch size per GPU, $GRADIENT_ACC_STEPS gradient accumulation steps"
     # --use_deepspeed \
@@ -21,30 +21,28 @@ accelerate launch --main_process_port 31225 \
     --lora_dropout 0.1 \
     --tokenizer_name meta-llama/Llama-2-7b-hf \
     --use_slow_tokenizer \
-    --train_data_path /content/ecg_llm/ptbxl/ptbxl_ecg_train.jsonl \
+    --train_data_path /content/drive/MyDrive/Akanta/ptb-xl/ptbxl_ecg_train.jsonl \
     --max_seq_length 128 \
     --gradient_checkpointing \
     --use_8bit_optimizer \
     --preprocessing_num_workers 2 \
     --checkpointing_steps epoch \
     --per_device_train_batch_size $BATCH_SIZE_PER_GPU \
-    --gradient_accumulation_steps 16 \
+    --gradient_accumulation_steps $GRADIENT_ACC_STEPS \
     --learning_rate 2e-5 \
     --lr_scheduler_type linear \
     --warmup_ratio 0.03 \
     --weight_decay 0. \
     --num_train_epochs 3 \
-    --output_dir /content/ecg_llm/save_dir_llama2 \
+    --output_dir /content/drive/MyDrive/Akanta/ptb-xl/save_dir_llama2 \
     --with_tracking \
     --report_to tensorboard \
     --use_ecg_llm \
     --dev_ratio 0.1 \
     --val_test_ratio 0.1 \
-    --logging_steps 100 \
-    --eval_step 3200 \
-    --test_step 4000 \
+    --logging_steps 50 \
     --llm_type llama_2 \
-    --cache_dir /content/ecg_llm/cache-dir
+    --cache_dir /content/drive/MyDrive/Akanta/ptb-xl/cache-dir
 
 
 # /ecg_llama_7b_new_2   ecg_llama_7b_new_2_llama2_chat_hf  ecg_llama_7b_new_2_Llama-2-7b-hf metric_error_test
