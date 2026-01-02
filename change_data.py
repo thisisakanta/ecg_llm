@@ -65,8 +65,8 @@ def clean_data_by_file_path(input_file_path, output_file_path):
     print(f"Cleaned data saved to: {output_file_path}")
 
 # --- Execution ---
-input_file = '/home/user/Downloads/2005047/MEIT/ECG_LLMs/ptbxl/ptbxl_ecg_train.jsonl'
-output_file = "/home/user/Downloads/2005047/MEIT/ECG_LLMs/ptbxl/ptbxl_ecg_train.jsonl_cleaned.jsonl"
+input_file = '/content/ecg_llm/ptbxl/ptbxl_ecg_train.jsonl'
+output_file = "/content/ecg_llm/ptbxl/ptbxl_ecg_train.jsonl_cleaned.jsonl"
 
 # Assuming you place your list of records into 'input_data.json'
 # If you only have one record, wrap it in a list [record] in the file.
