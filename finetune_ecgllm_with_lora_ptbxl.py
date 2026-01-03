@@ -1208,7 +1208,17 @@ def main():
 
 
                             else:
-                                input_ids_for_inference = torch.stack([input_ids[i, :first_non_minus_100[i]] for i in range(input_ids_num)]).to(input_ids.device)
+                                #input_ids_for_inference = torch.stack([input_ids[i, :first_non_minus_100[i]] for i in range(input_ids_num)]).to(input_ids.device)
+                                mask = labels.eq(-100)
+                                masked = []
+                                for i in range(input_ids.size(0)):
+                                    sel = input_ids[i][mask[i]]
+                                    masked.append(sel)
+                                
+                                input_ids_for_inference = pad_sequence(
+                                    masked, batch_first=True, padding_value=tokenizer.pad_token_id
+                                ).cuda()
+
 
                             output_ids = model.generate(
                                         input_ids=input_ids_for_inference,
